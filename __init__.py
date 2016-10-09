@@ -1,10 +1,17 @@
 from flask import Flask, request
+from connectdb import connection
+
 app = Flask(__name__)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 @app.route("/")
 def hello():
+	try:
+		c,conn = connection()
+		return "okay"
+	except Exception as e:
+		return (str(e))
 	return "this bad boy is working!"
 @app.route("/getWord", methods=['GET'])
 def getWord():
